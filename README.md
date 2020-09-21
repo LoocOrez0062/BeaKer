@@ -37,6 +37,13 @@ After Sysmon starts sending data to ElasticSearch, Kibana will be ready to go. F
 Download the latest release tar file, extract it, and inside the `BeaKer` directory,
 run `./install_beaker.sh` on the Linux machine that will aggregate your Sysmon data and host Kibana.
 
+Installation order on fresh install of Ubuntu 16.04:
+ - Install Docker - /BeaKer/shell-lib/docker/install_docker.sh
+ - Generate the Docker images for installation - /BeaKer/installer/generate_installer.sh
+ - Install Beaker (this will exit with fail because of the sym links) - /BeaKer/installer/stage/BeaKer/install_beaker.sh 
+ - remove bad sym links - rm -rf /opt/BeaKer/beaker /opt/BeaKer/docker-compose.yml /opt/BeaKer/kibana /opt/BeaKer/elasticsearch /opt/Beaker/shell-lib
+ - Replace the SYM links with Files - mv /BeaKer/beaker /Beaker/shell-lib /BeaKer/docker-compose.yml /BeaKer/kibana /BeaKer/elasticsearch /opt/BeaKer
+
 The automated installer will:
   - Install Docker and Docker-Compose
   - Create a configuration directory in `/etc/BeaKer`
